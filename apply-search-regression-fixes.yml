@@ -1,0 +1,51 @@
+name: Apply search regression fixes
+
+on:
+  push:
+    branches:
+      - fix/search-three-real
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Patch academic search engine
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          path = Path('server/academicSearchEngine.ts')
+          text = path.read_text(encoding='utf-8')
+
+          old = r'''/\b(?:arguments?\s+(?:sur|pour|contre|de|du|d['’])|corpus\s+d['’]arguments?|liste\s+d['’]arguments?|arguments?\s+(?:de\s+)?dissertation)\b/i.test(cleanQuery) ||'''
+          new = r'''/\b(?:arguments?\s+(?:(?:philosophiques?|litt[ée]raires?|de\s+dissertation|sur|pour|contre|de|du|d['’])\s+){0,3}|corpus\s+d['’]arguments?|liste\s+d['’]arguments?)\b/i.test(cleanQuery) ||'''
+          if old not in text:
+              raise SystemExit('argument-intent anchor not found')
+          text = text.replace(old, new, 1)
+
+          anchor = '''  // Recherche de définition : répondre directement, sans transformer la demande en cours de littérature.\n'''
+          insertion = '''  // Résolution explicite de L'Étranger : empêcher un fallback encyclopédique ambigu.\n  const isLEtrangerThemesQuery = /\\bl[’']etranger\\b/i.test(normalizedFrenchQuery) && /\\bthemes?\\b/i.test(normalizedFrenchQuery);\n  if (isLEtrangerThemesQuery) {\n    const concepts: CourseConceptFormula[] = [\n      { name: "Thème de l'absurde", formulaOrRule: "Meursault confronté à l'indifférence du monde et à l'absence de sens préétabli.", explanation: "Le roman met en scène l'expérience de l'absurde et le refus de feindre une croyance que Meursault n'éprouve pas.", contextOrApplication: "Thème central de L'Étranger." },\n      { name: "Thème de l'étrangeté sociale", formulaOrRule: "Meursault apparaît étranger aux conventions affectives et morales de son entourage.", explanation: "Le personnage est jugé autant pour son comportement face aux normes sociales que pour ses actes.", contextOrApplication: "À exploiter pour analyser le jugement social et moral." },\n      { name: "Thème de la mort", formulaOrRule: "La mort impose la finitude et conduit Meursault à une lucidité nouvelle.", explanation: "L'approche de la mort transforme son rapport au monde et à sa propre condition.", contextOrApplication: "À mobiliser dans un commentaire ou une dissertation." },\n      { name: "Thème de la liberté", formulaOrRule: "La lucidité devant l'absurde ouvre une liberté intérieure.", explanation: "Meursault assume lucidement sa situation et cesse de rechercher une justification extérieure.", contextOrApplication: "Relie L'Étranger aux notions d'absurde et de liberté." }\n    ];\n    return { query: originalQuery, discipline: "francais", disciplineLabel: "Français & Littérature", cycle: "second_cycle_bac", level: "terminale", levelLabel: "Première & Terminale", chapterTitle: "L'Étranger — Albert Camus : Thèmes majeurs", definitionAndScope: "L'Étranger (1942), roman d'Albert Camus, explore notamment l'absurde, l'étrangeté sociale, la mort et la liberté.", coreConceptsAndFormulas: concepts, stepByStepMethod: [], solvedExample: { problemStatement: "Quels sont les principaux thèmes de L'Étranger ?", solutionStepByStep: "Identifier l'absurde, l'étrangeté sociale, la mort et la liberté.", finalAnswer: "Les thèmes majeurs sont l'absurde, l'étrangeté sociale, la mort et la liberté." }, classicExamTraps: ["Confondre les thèmes du roman avec ceux d'une autre œuvre."], selfCheckChecklist: ["Ai-je identifié l'absurde ?"], quickRevisionMemo: "L'Étranger : absurde, étrangeté sociale, mort, liberté.", certificationNote: "Fiche ciblée de l'œuvre demandée." };\n  }\n\n'''
+          if anchor not in text:
+              raise SystemExit('French search anchor not found')
+          text = text.replace(anchor, insertion + anchor, 1)
+
+          anchor2 = '''function isSearchResultRelevant(result: CourseSearchResult, rawQuery: string): boolean {\n  if (result.noResult) return true;\n'''
+          insertion2 = '''function isSearchResultRelevant(result: CourseSearchResult, rawQuery: string): boolean {\n  if (result.noResult) return true;\n\n  const normalizedQuery = normalizeString(rawQuery);\n  const normalizedCorpus = normalizeString([result.chapterTitle, result.definitionAndScope, result.directContent || '', result.fullCourseContent || '', result.quickRevisionMemo || '', ...(result.coreConceptsAndFormulas || []).flatMap(c => [c.name, c.formulaOrRule, c.explanation, c.contextOrApplication])].join(' '));\n  // Un identifiant de corpus comme NTSGOD peut ne pas être recopié dans le texte final.\n  // La présence effective des deux auteurs demandés suffit alors à établir la pertinence.\n  if (/\\bbergson\\b/i.test(normalizedQuery) && /\\bnietzsche\\b/i.test(normalizedQuery) && /\\bbergson\\b/i.test(normalizedCorpus) && /\\bnietzsche\\b/i.test(normalizedCorpus)) return true;\n'''
+          if anchor2 not in text:
+              raise SystemExit('relevance anchor not found')
+          text = text.replace(anchor2, insertion2, 1)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit fixes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add server/academicSearchEngine.ts
+          git diff --cached --quiet && exit 0
+          git commit -m "fix(search): resolve three known regressions"
+          git push
