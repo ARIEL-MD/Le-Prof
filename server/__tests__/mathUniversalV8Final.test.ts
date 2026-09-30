@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { tryGenericUniversalV8Resolution } from '../exercisePipeline/genericUniversalV8Solver';
+const q=(cleanText:string)=>({id:'v8',numberLabel:'1',cleanText} as any);
+test('V8 trig exact',()=>{const r=tryGenericUniversalV8Resolution('',q('Calculer cos(pi/3)'));assert.ok(r);assert.match(r.finalAnswer,/1\/2|frac\{1\}\{2\}/)});
+test('V8 trig equation',()=>{const r=tryGenericUniversalV8Resolution('',q('Résoudre sin(x)=1/2'));assert.ok(r);assert.match(r.finalAnswer,/pi|\\pi/)});
+test('V8 conditional probability',()=>{const r=tryGenericUniversalV8Resolution('',q('Sachant que P(A)=0.4, P(B)=0.5 et P(A ∩ B)=0.2, calculer P(A|B).'));assert.ok(r);assert.match(r.finalAnswer,/0\.4/)});
+test('V8 variance',()=>{const r=tryGenericUniversalV8Resolution('',q('Calculer la variance de la série x=[1,2,3,4].'));assert.ok(r);assert.match(r.finalAnswer,/1\.25/)});
+test('V8 sequence limit',()=>{const r=tryGenericUniversalV8Resolution('',q('On a u_n = 1/2^n. Déterminer la limite de u_n.'));assert.ok(r);assert.match(r.finalAnswer,/0/)});
+test('V8 triangle area',()=>{const r=tryGenericUniversalV8Resolution('',q('Un triangle a une base = 10 cm et une hauteur = 6 cm. Calculer son aire.'));assert.ok(r);assert.match(r.finalAnswer,/30/)});

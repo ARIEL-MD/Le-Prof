@@ -1,0 +1,21 @@
+{
+  "name": "Le Prof — V40 Dissertation littéraire CI renforcée",
+  "description": "Version V36 : ajout de la traduction dans « Pose ton devoir ou exercice (toutes matières) » avec moteur local déterministe Français/Anglais/Allemand/Espagnol et relais Google Traduction externe via URL, sans API IA. Renforcement du corpus dissertation littéraire avec des modèles issus de trois documents Scribd fournis par l’utilisateur, sans IA ni API d’IA.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "UNIVERSAL_MULTI_COUNTRY_CURRICULUM_ROUTER",
+    "STRICT_COUNTRY_SEPARATION",
+    "UNIVERSAL_SUBJECT_ROUTER",
+    "VERIFIED_SOURCE_PROVENANCE",
+    "EXACT_REQUESTED_RESULT_MODE",
+    "LOCAL_DETERMINISTIC_TRANSLATION",
+    "GOOGLE_TRANSLATION_EXTERNAL_FALLBACK",
+    "NO_AI_TRANSLATION_API"
+  ],
+  "capabilities": [
+    "OFFICIAL_CURRICULUM_VERSIONING",
+    "OFFICIAL_CURRICULUM_COVERAGE_MANIFEST",
+    "STRICT_OFFICIAL_SOURCE_GATING",
+    "DEFAULT_SOURCE_FREE_ANSWER"
+  ]
+}

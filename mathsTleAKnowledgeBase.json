@@ -1,0 +1,277 @@
+{
+  "name": "LE PROF — Knowledge Base Maths Tle A (A1 & A2)",
+  "version": "2.0.0",
+  "source": "Mathématiques Terminales Littéraires - Côte d'Ivoire École Numérique (Tle A1 & A2)",
+  "level": "Terminale A (A1 & A2)",
+  "seriesGuidelines": {
+    "A1": {
+      "description": "Série A1 (Littéraire avec dominante Mathématiques renforcées) : programme complet incluant Moindres Carrés, variables aléatoires, primitives avancées e^u & calcul intégral/aires.",
+      "allowedMethods": [
+        "Ajustement linéaire par Moindres Carrés (Covariance, variances, r, droites y=ax+b et x=a'y+b')",
+        "Méthode de Mayer",
+        "Ajustement non-linéaire avec changement de variable logarithmique (y = ln z)",
+        "Tableau de séries marginales et fréquences marginales",
+        "Variables aléatoires X, loi de probabilité, espérance E(X), variance V(X), écart-type σ",
+        "Primitives de fonctions exponentielles (e^(ax+b), u'e^u, quotients)",
+        "Calcul intégral ∫_a^b f(x)dx et calcul d'aires délimitées par courbes",
+        "Suites arithmétiques et géométriques",
+        "Systèmes linéaires R² et inéquations graphiques"
+      ],
+      "specificContent": [
+        "Variables aléatoires, espérance, variance et rentabilité de jeu",
+        "Moindres Carrés, coefficient de corrélation r (|r| ≥ 0.87), droites de régression Y en X et X en Y",
+        "Primitives de u'e^u et primitives rationnelles d'exponentielles",
+        "Calcul d'intégrales et calculs d'aires en u.a et cm²"
+      ]
+    },
+    "A2": {
+      "description": "Série A2 (Littéraire standard) : résolution ciblée sur les méthodes autorisées pour A2 (Mayer, probabilités finies simples, polynômes/rationnelles, ln/exp sans intégrales ni variables aléatoires).",
+      "allowedMethods": [
+        "Ajustement linéaire par la Méthode de Mayer (droite G1G2 passant par G)",
+        "Point moyen G(X̄, Ȳ)",
+        "Probabilités sur ensembles finis, équiprobabilité, événement contraire",
+        "Fonctions polynômes et rationnelles (limites, dérivées, variations, TVI, dichotomie, balayage)",
+        "Logarithme népérien et exponentielle népérienne (bases, équations, variations)",
+        "Suites arithmétiques et géométriques (sommes, intérêts simples/composés)",
+        "Systèmes linéaires R² (substitution, combinaison) et inéquations graphiques"
+      ],
+      "forbiddenMethodsForA2": [
+        "Variables aléatoires (loi de probabilité, espérance E(X), variance V(X), écart type σ) -> Réservé A1",
+        "Méthode des moindres carrés (Covariance, coefficient de corrélation r, droites de régression moindres carrés) -> Réservé A1 (utiliser Mayer pour A2)",
+        "Ajustement logarithmique non-linéaire (y = ln z) -> Réservé A1",
+        "Séries marginales complètes avec tableau de contingence avancé -> Réservé A1",
+        "Primitives d'exponentielles composées (u'e^u) et calcul intégral / calcul d'aires -> Réservé A1"
+      ],
+      "defaultAdjustmentMethod": "Méthode de Mayer"
+    }
+  },
+  "chapters": [
+    {
+      "id": "ch1",
+      "lessonNumber": 1,
+      "title": "Étude de fonctions polynômes et rationnelles",
+      "pages": [22, 49],
+      "applicableSeries": ["A1", "A2"],
+      "topics": [
+        "limite d'un polynôme en un point",
+        "limite d'un polynôme à l'infini",
+        "limite d'une fraction rationnelle",
+        "opérations sur les limites",
+        "formes indéterminées",
+        "asymptote horizontale",
+        "asymptote verticale",
+        "asymptote oblique",
+        "position relative",
+        "dérivées usuelles et opérations",
+        "sens de variation",
+        "extremum relatif",
+        "tangente",
+        "TVI",
+        "dichotomie",
+        "balayage",
+        "centre de symétrie"
+      ],
+      "formulas": [
+        "lim(x->a) P(x) = P(a)",
+        "lim(x->±∞) P(x) = lim(x->±∞) a_n x^n",
+        "Tangente : y = f'(a)(x - a) + f(a)",
+        "Asymptote oblique : lim(x->±∞) [f(x) - (ax+b)] = 0"
+      ],
+      "methods": [
+        "Calculer limites aux bornes du domaine",
+        "Identifier les asymptotes",
+        "Calculer f'(x) et dresser le tableau de variations",
+        "Appliquer le TVI et encadrer par dichotomie ou balayage"
+      ]
+    },
+    {
+      "id": "ch2",
+      "lessonNumber": 2,
+      "title": "Probabilités",
+      "pages": [50, 62],
+      "applicableSeries": ["A1", "A2"],
+      "topics": [
+        "expérience aléatoire",
+        "univers Ω",
+        "événements",
+        "équiprobabilité",
+        "événement contraire",
+        "tirages simultanés",
+        "tirages successifs sans remise",
+        "tirages successifs avec remise",
+        "variable aléatoire (A1 seulement)",
+        "espérance et variance (A1 seulement)"
+      ],
+      "formulas": [
+        "P(A) = Card(A) / Card(Ω)",
+        "P(Ā) = 1 - P(A)",
+        "C_n^p = n! / (p!(n-p)!)",
+        "A_n^p = n! / (n-p)!",
+        "[A1 SEULEMENT] E(X) = Σ p_i x_i",
+        "[A1 SEULEMENT] V(X) = Σ p_i x_i^2 - (E(X))^2"
+      ],
+      "methods": [
+        "Calculer Card(Ω) et probabilités élémentaires",
+        "Utiliser l'événement contraire",
+        "[A1 SEULEMENT] Déterminer la loi de X, E(X), V(X) et σ"
+      ]
+    },
+    {
+      "id": "ch3",
+      "lessonNumber": 3,
+      "title": "Logarithme népérien",
+      "pages": [63, 72],
+      "applicableSeries": ["A1", "A2"],
+      "topics": [
+        "définition ln",
+        "domaine",
+        "propriétés algébriques",
+        "limites de référence",
+        "dérivée u'/u",
+        "équations et inéquations",
+        "primitives u'/u"
+      ],
+      "formulas": [
+        "ln(ab) = ln a + ln b",
+        "ln(a/b) = ln a - ln b",
+        "lim(x->+∞) ln x = +∞, lim(x->0+) ln x = -∞",
+        "(ln u)' = u'/u"
+      ],
+      "methods": [
+        "Poser domaine de validité",
+        "Résoudre équations et inéquations logarithmiques"
+      ]
+    },
+    {
+      "id": "ch4",
+      "lessonNumber": 4,
+      "title": "Fonction exponentielle",
+      "pages": [73, 86],
+      "applicableSeries": ["A1", "A2"],
+      "topics": [
+        "définition exp",
+        "propriétés algébriques",
+        "limites de référence",
+        "dérivée (e^u)' = u' e^u",
+        "équations et inéquations",
+        "primitives exponentielles (A1 seulement)",
+        "limites quotients exponentielles (A1 seulement)"
+      ],
+      "formulas": [
+        "e^(a+b) = e^a e^b",
+        "lim(x->+∞) e^x = +∞, lim(x->-∞) e^x = 0",
+        "(e^u)' = u' e^u",
+        "[A1 SEULEMENT] ∫ u' e^u dx = e^u + C"
+      ],
+      "methods": [
+        "Résoudre équations et inéquations exponentielles",
+        "[A1 SEULEMENT] Déterminer primitives d'exponentielles"
+      ]
+    },
+    {
+      "id": "ch5",
+      "lessonNumber": 5,
+      "title": "Suites numériques",
+      "pages": [12, 21],
+      "applicableSeries": ["A1", "A2"],
+      "topics": [
+        "suites arithmétiques",
+        "terme général arithmétique",
+        "somme arithmétique",
+        "suites géométriques",
+        "terme général géométrique",
+        "somme géométrique",
+        "intérêts simples et composés"
+      ],
+      "formulas": [
+        "u_n = u_p + (n-p)r",
+        "S_arith = (n-p+1)(u_p+u_n)/2",
+        "v_n = v_p q^(n-p)",
+        "S_geom = v_p (1-q^(n-p+1))/(1-q)"
+      ],
+      "methods": [
+        "Démontrer nature arithmétique ou géométrique",
+        "Calculer sommes et termes généraux",
+        "Modéliser problèmes d'épargne ou salaires"
+      ]
+    },
+    {
+      "id": "ch6",
+      "lessonNumber": 6,
+      "title": "Statistique à deux variables",
+      "pages": [87, 108],
+      "applicableSeries": ["A1", "A2"],
+      "topics": [
+        "série double",
+        "nuage de points",
+        "point moyen G",
+        "méthode de Mayer",
+        "séries marginales (A1 seulement)",
+        "covariance (A1 seulement)",
+        "corrélation r (A1 seulement)",
+        "moindres carrés (A1 seulement)",
+        "ajustement logarithmique (A1 seulement)"
+      ],
+      "formulas": [
+        "Point moyen G(X̄, Ȳ)",
+        "Mayer : a = (Ȳ_2 - Ȳ_1)/(X̄_2 - X̄_1), b = Ȳ_1 - a X̄_1",
+        "[A1 SEULEMENT] Cov(X,Y) = (1/n) Σ x_i y_i - X̄ Ȳ",
+        "[A1 SEULEMENT] r = Cov(X,Y) / (√V(X) √V(Y))",
+        "[A1 SEULEMENT] Droite de régression : y = ax + b, a = Cov(X,Y)/V(X), b = Ȳ - a X̄"
+      ],
+      "methods": [
+        "Calculer G et appliquer Mayer (A2 & A1)",
+        "[A1 SEULEMENT] Calculer Cov, r, droites de régression par moindres carrés et ajustement log"
+      ]
+    },
+    {
+      "id": "ch7",
+      "lessonNumber": 7,
+      "title": "Systèmes linéaires dans ℝ × ℝ et programmation linéaire",
+      "pages": [2, 11],
+      "applicableSeries": ["A1", "A2"],
+      "topics": [
+        "systèmes 2x2 substitution et combinaison",
+        "systèmes non linéaires ln et exp",
+        "inéquations graphiques",
+        "droite frontière",
+        "programmation linéaire",
+        "couples entiers admissibles"
+      ],
+      "formulas": [
+        "ax + by = c",
+        "X = ln x, Y = ln y",
+        "X = e^x, Y = e^y",
+        "ax + by + c = 0"
+      ],
+      "methods": [
+        "Résoudre systèmes par substitution ou combinaison",
+        "Résoudre graphiquement inéquations et systèmes d'inéquations",
+        "Déterminer les solutions entières dans le polygone de contraintes"
+      ]
+    },
+    {
+      "id": "ch8",
+      "lessonNumber": 8,
+      "title": "Primitives et calcul intégral",
+      "pages": [109, 117],
+      "applicableSeries": ["A1"],
+      "topics": [
+        "primitives usuelles",
+        "condition initiale",
+        "opérations u+v, au, u'u^m, u'/u, u'e^u",
+        "intégrale définie",
+        "calcul d'aires"
+      ],
+      "formulas": [
+        "∫_a^b f(x)dx = [F(x)]_a^b = F(b) - F(a)",
+        "Aire sous courbe : A = (∫_a^b f(x)dx) u.a",
+        "Aire entre deux courbes : A = (∫_a^b [f(x) - g(x)]dx) u.a"
+      ],
+      "methods": [
+        "Calculer primitives et intégrales",
+        "Calculer aires délimitées par courbes et droites"
+      ]
+    }
+  ]
+}

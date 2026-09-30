@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { tryUniversalCompletionResolution } from '../exercisePipeline/genericUniversalCompletionSolver';
+import { ParsedQuestion } from '../exercisePipeline/types';
+const q=(s:string,t:ParsedQuestion['detectedType']='general_math'):ParsedQuestion=>({id:'t',number:1,numberLabel:'1.',rawText:s,cleanText:s,detectedType:t});
+test('primitive polynomial',()=>assert.match(tryUniversalCompletionResolution('',q('Déterminer une primitive de 3x^2'))!.finalAnswer,/x\^\{3\}/));
+test('trig affine',()=>assert.match(tryUniversalCompletionResolution('',q('Résoudre sin(2x+1)=0')).finalAnswer,/2kπ/));
+test('binomial',()=>assert.match(tryUniversalCompletionResolution('',q('Loi binomiale n=10 p=0.5, probabilité exactement 3')).finalAnswer,/P\(X=3\)/));
+test('statistics',()=>assert.match(tryUniversalCompletionResolution('',q('Calculer la moyenne de la série : 1 2 3 4 5')).finalAnswer,/3/));
+test('pythagore',()=>assert.match(tryUniversalCompletionResolution('',q('Triangle rectangle, côtés 3 et 4, trouver l’hypoténuse')).finalAnswer,/5/));

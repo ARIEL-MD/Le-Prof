@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
+    <meta name="theme-color" content="#0132C4" />
+    <title>Le Prof — Examens &amp; Concours (BEPC &amp; BAC) v10</title>
+    <meta name="description" content="Plateforme éducative d'excellence mondiale de la 6e à la Terminale, CPGE &amp; Supérieur couvrant toutes les matières (Maths, PC, SVT, Philosophie, Histoire-Géo, Français, Langues, SES, Informatique) et tous les programmes internationaux (Baccalauréats francophones, IB DP, AP, A-Levels, Brevet) selon la Méthode Papa." />
+    <meta property="og:title" content="Le Prof — Examens &amp; Concours (BEPC &amp; BAC) v10" />
+    <meta property="og:description" content="Plateforme éducative d'excellence mondiale de la 6e à la Terminale, CPGE &amp; Supérieur couvrant toutes les matières (Maths, PC, SVT, Philosophie, Histoire-Géo, Français, Langues, SES, Informatique) et tous les programmes internationaux (Baccalauréats francophones, IB DP, AP, A-Levels, Brevet) selon la Méthode Papa." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/pwa-512x512.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/pwa-512x512.png" />
+    <script>
+      (function() {
+        try {
+          var mode = localStorage.getItem('leprof_theme_mode');
+          if (mode === 'dark') {
+            // Réinitialisation en mode white par défaut comme requis
+            localStorage.setItem('leprof_theme_mode', 'light');
+          }
+          document.documentElement.classList.remove('dark');
+        } catch (e) {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

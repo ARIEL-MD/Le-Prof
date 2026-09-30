@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+/* Police documentaire universelle (Arial / Calibri / Helvetica) :
+   Standard absolu des documents officiels, feuilles d'examens (BEPC & BAC),
+   Google Docs et suites bureautiques. Appliquée universellement à tout le site. */
+:root {
+  --font-document: Arial, "Helvetica Neue", Helvetica, Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html, body, #root {
+  font-family: Arial, "Helvetica Neue", Helvetica, Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  height: 100%;
+  overscroll-behavior-y: none;
+}
+body {
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+button, input, select, textarea {
+  font-family: inherit;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Empêche iOS de zoomer automatiquement sur les <textarea>/<input> en focus
+   (le zoom se déclenche si font-size < 16px) tout en gardant un texte de
+   taille raisonnable visuellement grâce au design déjà en text-sm ailleurs. */
+textarea, input, select {
+  font-size: 16px;
+}
+@media (min-width: 640px) {
+  textarea, input, select {
+    font-size: inherit;
+  }
+}
+
+/* Fait suivre les classes dark:* à la classe .dark posée sur <html> par
+   App.tsx (toggle manuel + localStorage), au lieu de suivre uniquement les
+   préférences système (comportement par défaut de Tailwind v4). Sans cette
+   ligne, le bouton "Mode Sombre/Clair" du Header n'a aucun effet visuel. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Palette de marque Le Prof — recalée sur les couleurs exactes du logo
+   (bleu #0030B6 et accent turquoise #08F1D5).
+   On surcharge la palette "indigo" native de Tailwind : toutes les classes
+   indigo-* déjà utilisées dans l'app basculent automatiquement sur le bleu Le Prof. */
+@theme {
+  --font-sans: Arial, "Helvetica Neue", Helvetica, Calibri, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: Arial, "Helvetica Neue", Helvetica, Calibri, Georgia, serif;
+
+  /* Indigo — Bleu institutionnel d'examen Le Prof (basé sur #0030B6) */
+  --color-indigo-50: #F3F6FD;
+  --color-indigo-100: #E4EAF8;
+  --color-indigo-200: #C9D6F2;
+  --color-indigo-300: #9EB6E8;
+  --color-indigo-400: #507EDC;
+  --color-indigo-500: #1D54C4;
+  --color-indigo-600: #0030B6;
+  --color-indigo-700: #002694;
+  --color-indigo-800: #001E75;
+  --color-indigo-900: #021650;
+  --color-indigo-950: #010D30;
+
+  /* Accent turquoise du logo, resserré et assagi (minéral, accessible WCAG AA) */
+  --color-teal-50: #F0FDFB;
+  --color-teal-100: #CCFBF5;
+  --color-teal-200: #99F6E8;
+  --color-teal-300: #5EEAD6;
+  --color-teal-400: #2DD4BF;
+  --color-teal-500: #14B8A6;
+  --color-teal-600: #0D9488;
+  --color-teal-700: #0F766E;
+  --color-teal-800: #115E59;
+  --color-teal-900: #134E4A;
+  --color-teal-950: #042F2E;
+
+  /* Accent secondaire bleu ciel équilibré */
+  --color-sky-50: #F0F9FF;
+  --color-sky-100: #E0F2FE;
+  --color-sky-200: #BAE6FD;
+  --color-sky-300: #7DD3FC;
+  --color-sky-400: #38BDF8;
+  --color-sky-500: #0EA5E9;
+  --color-sky-600: #0284C7;
+  --color-sky-700: #0369A1;
+  --color-sky-800: #075985;
+  --color-sky-900: #0C4A6E;
+  --color-sky-950: #082F49;
+}
+
+/* MathLive Mathfield styling */
+math-field {
+  --primary: #0030B6;
+  --caret-color: #0030B6;
+  --selection-background-color: rgba(0, 48, 182, 0.2);
+  --selection-color: inherit;
+  font-size: 1.35rem;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  display: block;
+  width: 100%;
+}
+
+.dark math-field {
+  --primary: #85A5FF;
+  --caret-color: #85A5FF;
+  --text-color: #F8FAFC;
+  --selection-background-color: rgba(133, 165, 255, 0.3);
+  color: #F8FAFC !important;
+}
+
+math-field::part(virtual-keyboard-toggle),
+math-field::part(menu-toggle) {
+  display: none !important;
+}
+
+/* KaTeX Formula Rendering Optimization */
+.katex {
+  font-size: 1.05em;
+  text-rendering: geometricPrecision;
+  max-width: 100%;
+}
+
+.katex-display {
+  margin: 0.5em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0.25rem;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.inline-math {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.katex .fbox,
+.katex .fcolorbox {
+  border: 0.05em solid currentColor !important;
+  box-sizing: border-box !important;
+  margin-right: 4px !important;
+  margin-left: 2px !important;
+  padding: 0.2em 0.35em !important;
+}
+
+/* Inherit text color in bubbles and dark mode */
+.dark .katex {
+  color: inherit;
+}
+
+.bg-indigo-600 .katex,
+.text-white .katex {
+  color: #FFFFFF !important;
+}
+
+/* Format documentaire Word : justification stricte avec alignement de fin à gauche et césure automatique */
+.academic-paper-sheet p,
+.academic-word-redaction,
+.word-justified {
+  text-align: justify;
+  text-align-last: left;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-break: break-word;
+}
+
+
+
